@@ -6,13 +6,13 @@
       entity_id: input_boolean.timbre_9_button
       to: "on"
   action:
-      - variables:
-          repeticiones_global: "{{ states('input_number.timbre_repeticiones_global') | int(1) }}"
-          ancho_pulso_global: "{{ states('number.sonoff_10021c07d7_pulsewidth') | float(0.5) }}"
+    - variables:
+        repeticiones_global: "{{ states('input_number.timbre_repeticiones_global') | int(1) }}"
+        ancho_pulso_global: "{{ states('number.sonoff_10021c07d7_pulsewidth') | float(0.5) }}"
     # Activamos el modo pulso en el dispositivo Sonoff
-      - service: switch.turn_on
-        target:
-          entity_id: switch.sonoff_10021c07d7_pulse
+    - service: switch.turn_on
+      target:
+        entity_id: switch.sonoff_10021c07d7_pulse
     # Método mejorado que valida la ejecución completa del pulso
     - repeat:
         count: "{{ repeticiones_global }}"
@@ -56,8 +56,8 @@
   action:
     - variables:
         repeticiones: "{{ states('input_number.numero_de_timbres_timbre_10') | int(0) }}"
-        ejecuciones:  "{{ states('input_number.timbre_ejecuciones_10') | int(0) }}"
-        espera:       "{{ states('input_number.delay_entre_ejecuciones_timbre_10') | int(0) }}"
+        ejecuciones: "{{ states('input_number.timbre_ejecuciones_10') | int(0) }}"
+        espera: "{{ states('input_number.delay_entre_ejecuciones_timbre_10') | int(0) }}"
         ancho_pulso: "{{ states('input_number.sonoff_10021c07d7_pulsewidth_timbre_10') | float(0.5) }}"
     # Activamos el modo pulso en el dispositivo Sonoff
     - service: switch.turn_on
@@ -131,7 +131,7 @@
     - platform: time
       at: input_datetime.timbre_8
   action:
-      - variables:
+    - variables:
           repeticiones_global: "{{ states('input_number.timbre_repeticiones_global') | int(1) }}"
           ancho_pulso_global: "{{ states('number.sonoff_10021c07d7_pulsewidth') | float(0.5) }}"
     # Activamos el modo pulso en el dispositivo Sonoff
