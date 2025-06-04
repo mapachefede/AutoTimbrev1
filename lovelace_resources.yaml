@@ -1,0 +1,4 @@
+- url: /hacsfile/button-card/button-card.js
+  type: module
+- url: /hacsfile/lovelace-digital-clock/digital-clock.js
+  type: module

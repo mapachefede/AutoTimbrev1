@@ -1,0 +1,149 @@
+views:
+  - title: Panel Principal
+    path: home
+    icon: mdi:home
+    type: masonry
+    cards:
+      - type: entities
+        title: Reloj del sistema
+        entities:
+          - entity: sensor.time_am_pm
+            name: Hora actual (reloj del sistema con segundos)
+        state_color: true
+      - type: button
+        name: Timbre
+        show_icon: true
+        show_name: true
+        tap_action:
+          action: toggle
+        entity: switch.sonoff_10021c07d7
+      - type: custom:button-card
+        entity: input_boolean.timbre_10_button
+        name: ¡EMERGENCIA!
+        icon: mdi:toggle-switch-variant-off
+        show_name: true
+        show_icon: true
+        tap_action:
+          action: toggle
+        styles:
+          card:
+            - background-color: '0000000'
+          icon:
+            - color: '#FF0000'
+      - type: custom:button-card
+        entity: input_boolean.timbre_9_button
+        name: Reunión en el Patio
+        icon: mdi:toggle-switch-variant-off
+        show_name: true
+        show_icon: true
+        tap_action:
+          action: toggle
+        styles:
+          card:
+            - background-color: '0000000'
+          icon:
+            - color: '#008000'
+      - type: button
+        name: LED Sonoff
+        show_icon: true
+        show_name: true
+        tap_action:
+          action: toggle
+        entity: switch.sonoff_10021c07d7_led
+      - type: vertical-stack
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: button
+                name: Apagar Sistema
+                icon: mdi:power
+                show_name: true
+                show_icon: true
+                tap_action:
+                  action: call-service
+                  service: hassio.host_shutdown
+              - type: button
+                name: Reiniciar Sistema
+                icon: mdi:restart
+                show_name: true
+                show_icon: true
+                tap_action:
+                  action: call-service
+                  service: hassio.host_reboot
+              - show_name: true
+                show_icon: true
+                type: button
+                name: Apagado Automático
+                icon: mdi:clock-check
+                entity: input_boolean.apagado_automatico
+                tap_action:
+                  action: toggle
+                show_state: false
+          - type: markdown
+            content: >-
+              {% set hora = states('input_datetime.hora_apagado_auto') | default('00:00:00', true) %}
+              {% set auto_active = is_state('input_boolean.apagado_automatico', 'on') %}
+              {% set color = '#fdd835' if auto_active else '#44739e' %}
+              {% set hora_convertida = strptime(hora, '%H:%M:%S') if hora is string and hora != 'unknown' else none %}
+
+              {% if hora_convertida is not none %}
+                <center>
+                <h4>Apagado automático programado a las:</h4>
+                <h1><font color="{{ color }}">{{ hora_convertida.strftime('%I:%M %p') }}</font></h1>
+                </center>
+              {% else %}
+                <center><h1>Hora no configurada.</h1></center>
+              {% endif %}
+  - title: Configuración
+    path: configuracion
+    icon: mdi:cog
+    type: masonry
+    cards:
+      - type: entities
+        title: Apagado Automático
+        entities:
+          - entity: input_datetime.hora_apagado_auto
+          - entity: input_boolean.apagado_automatico
+      - type: entities
+        title: Horarios de Timbres
+        entities:
+          - entity: input_datetime.timbre_1
+          - entity: input_datetime.timbre_2
+          - entity: input_datetime.timbre_3
+          - entity: input_datetime.timbre_4
+          - entity: input_datetime.timbre_5
+          - entity: input_datetime.timbre_6
+          - entity: input_datetime.timbre_7
+          - entity: input_datetime.timbre_8
+  - title: Ajustes de Timbres # Nueva vista creada
+    path: ajustes_timbres # Puedes cambiar el path si lo deseas
+    icon: mdi:bell-cog # Puedes cambiar el icono si lo deseas
+    cards:
+      - type: entities
+        title: Ajustes Timbre 10
+        entities:
+          - entity: input_number.numero_de_timbres_timbre_10
+            name: Repeticiones Timbre 10
+          - entity: input_number.timbre_ejecuciones_10
+            name: Número de Ejecuciones Timbre 10
+          - entity: input_number.delay_entre_ejecuciones_timbre_10
+            name: Delay entre Ejecuciones Timbre 10
+          - entity: input_number.sonoff_10021c07d7_pulsewidth_timbre_10
+            name: Ancho de Pulso Sonoff (Timbre 10)
+      - type: entities
+        title: Ajustes Timbre 9
+        entities:
+          - entity: input_number.numero_de_timbres_timbre_9
+            name: Repeticiones Timbre 9
+          - entity: input_number.delay_entre_repeticiones_timbre_9
+            name: Delay entre Repeticiones (Timbre 9)
+      - type: entities
+        title: Ajustes Timbres Automáticos (1-8)
+        entities:
+          - entity: input_number.timbre_repeticiones_global
+            name: Repeticiones Globales Timbres 1-8
+          - entity: number.sonoff_10021c07d7_pulsewidth
+            name: INCHING Duration
+          - entity: input_number.delay_entre_repeticiones_timbres_1_8
+            name: Delay entre Repeticiones (Timbres 1-8)
+          

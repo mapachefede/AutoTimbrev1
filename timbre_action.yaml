@@ -1,0 +1,56 @@
+- id: '1676839000000'
+  alias: Timbre
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.timbre_button
+    to: 'on'
+  condition: []
+  action:
+  - variables:
+      repeticiones_global: '{{ states(''input_number.timbre_repeticiones_global'')
+        | int(1) }}'
+      ancho_pulso_global: '{{ states(''input_number.sonoff_10021c07d7_pulsewidth'')
+        | float(0.5) }}'
+  # Activamos el modo pulso en el dispositivo Sonoff
+  - service: switch.turn_on
+    target:
+      entity_id: switch.sonoff_10021c07d7_pulse
+  # Configuramos el ancho del pulso en el dispositivo Sonoff
+  - service: number.set_value
+    target:
+      entity_id: number.sonoff_10021c07d7_pulsewidth
+    data:
+      value: '{{ ancho_pulso_global }}'
+  # Método mejorado que valida la ejecución completa del pulso
+  - repeat:
+      count: '{{ repeticiones_global }}'
+      sequence:
+      # Guardamos el estado actual del switch
+      - variables:
+          estado_inicial: "{{ states('switch.sonoff_10021c07d7') }}"
+      # Encendemos el switch manualmente
+      - service: switch.turn_on
+        target:
+          entity_id: switch.sonoff_10021c07d7
+      # Esperamos a que el switch cambie a estado 'on'
+      - wait_template: "{{ states('switch.sonoff_10021c07d7') == 'on' }}"
+        timeout: "00:00:05"
+        continue_on_timeout: false
+      # Esperamos el tiempo exacto del pulso
+      - delay:
+          seconds: '{{ ancho_pulso_global }}'
+      # Apagamos el switch manualmente
+      - service: switch.turn_off
+        target:
+          entity_id: switch.sonoff_10021c07d7
+      # Esperamos a que el switch cambie a estado 'off'
+      - wait_template: "{{ states('switch.sonoff_10021c07d7') == 'off' }}"
+        timeout: "00:00:05"
+        continue_on_timeout: false
+      # Esperamos el tiempo de delay entre repeticiones
+      - delay:
+          seconds: '{{ states(''input_number.delay_entre_repeticiones_timbres_1_8'')
+            | float(0.5) }}'
+  mode: restart

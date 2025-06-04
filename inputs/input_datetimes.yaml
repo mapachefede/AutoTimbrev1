@@ -1,0 +1,36 @@
+  timbre_1:
+    name: "Timbre 1"
+    has_date: false
+    has_time: true
+  timbre_2:
+    name: "Timbre 2"
+    has_date: false
+    has_time: true
+  timbre_3:
+    name: "Timbre 3"
+    has_date: false
+    has_time: true
+  timbre_4:
+    name: "Timbre 4"
+    has_date: false
+    has_time: true
+  timbre_5:
+    name: "Timbre 5"
+    has_date: false
+    has_time: true
+  timbre_6:
+    name: "Timbre 6"
+    has_date: false
+    has_time: true
+  timbre_7:
+    name: "Timbre 7"
+    has_date: false
+    has_time: true
+  timbre_8:
+    name: "Timbre 8"
+    has_date: false
+    has_time: true
+  hora_apagado_auto:
+    name: "Hora apagado automático"
+    has_date: false
+    has_time: true

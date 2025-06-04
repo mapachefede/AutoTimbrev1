@@ -1,0 +1,72 @@
+numero_de_timbres_timbre_9:
+  name: "Repeticiones por ejecución (Timbre 9)"
+  initial: 1
+  min: 1
+  max: 20
+  step: 1
+  unit_of_measurement: "veces"
+
+numero_de_timbres_timbre_10:
+  name: "Repeticiones por ejecución (Timbre 10)"
+  initial: 1
+  min: 1
+  max: 20
+  step: 1
+  unit_of_measurement: "veces"
+
+timbre_ejecuciones_10:
+  name: "Número de ciclos (Timbre 10)"
+  initial: 1
+  min: 1
+  max: 10
+  step: 1
+  unit_of_measurement: "ciclos"
+
+delay_entre_ejecuciones_timbre_10:
+  name: "Delay entre ciclos (Timbre 10)"
+  initial: 5
+  min: 0
+  max: 60
+  step: 1
+  unit_of_measurement: "segundos"
+
+timbre_repeticiones_global:
+  name: "Repeticiones Globales Timbres 1-8"
+  initial: 1
+  min: 1
+  max: 20
+  step: 1
+  unit_of_measurement: "veces"
+
+sonoff_10021c07d7_pulsewidth_timbre_10:
+  name: "Ancho de Pulso Sonoff (Timbre 10)"
+  initial: 0.5
+  min: 0.5
+  max: 4.0
+  step: 0.5
+  unit_of_measurement: "segundos"
+
+sonoff_10021c07d7_pulsewidth:
+  name: "Ancho de Pulso Sonoff (Global)"
+  initial: 0.5
+  min: 0.5
+  max: 4.0
+  step: 0.5
+  unit_of_measurement: "segundos"
+
+delay_entre_repeticiones_timbre_9:
+  name: "Delay entre repeticiones (Timbre 9)"
+  initial: 0.5
+  min: 0.1
+  max: 5.0
+  step: 0.1
+  unit_of_measurement: "segundos"
+
+delay_entre_repeticiones_timbres_1_8:
+  name: "Delay entre repeticiones (Timbres 1-8)"
+  initial: 0.5
+  min: 0.1
+  max: 5.0
+  step: 0.1
+  unit_of_measurement: "segundos"
+

@@ -1,0 +1,12 @@
+timbre_9_button:
+  name: "Timbre 9 – Botón de Emergencia"
+  initial: off
+  icon: mdi:bell-alert
+
+timbre_10_button:
+  name: "Timbre 10 – Botón de Emergencia"
+  initial: off
+  icon: mdi:bell-alert
+apagado_automatico:
+  name: "Activar apagado automático"
+  initial: false
