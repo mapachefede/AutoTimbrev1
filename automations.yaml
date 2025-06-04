@@ -6,19 +6,13 @@
       entity_id: input_boolean.timbre_9_button
       to: "on"
   action:
-    - variables:
-        repeticiones_global: "{{ states('input_number.timbre_repeticiones_global') | int(1) }}"
-        ancho_pulso_global: "{{ states('input_number.sonoff_10021c07d7_pulsewidth') | float(0.5) }}"
+      - variables:
+          repeticiones_global: "{{ states('input_number.timbre_repeticiones_global') | int(1) }}"
+          ancho_pulso_global: "{{ states('number.sonoff_10021c07d7_pulsewidth') | float(0.5) }}"
     # Activamos el modo pulso en el dispositivo Sonoff
-    - service: switch.turn_on
-      target:
-        entity_id: switch.sonoff_10021c07d7_pulse
-    # Configuramos el ancho del pulso en el dispositivo Sonoff
-    - service: number.set_value
-      target:
-        entity_id: number.sonoff_10021c07d7_pulsewidth
-      data:
-        value: "{{ ancho_pulso_global }}"
+      - service: switch.turn_on
+        target:
+          entity_id: switch.sonoff_10021c07d7_pulse
     # Método mejorado que valida la ejecución completa del pulso
     - repeat:
         count: "{{ repeticiones_global }}"
@@ -137,19 +131,13 @@
     - platform: time
       at: input_datetime.timbre_8
   action:
-    - variables:
-        repeticiones_global: "{{ states('input_number.timbre_repeticiones_global') | int(1) }}"
-        ancho_pulso_global: "{{ states('input_number.sonoff_10021c07d7_pulsewidth') | float(0.5) }}"
+      - variables:
+          repeticiones_global: "{{ states('input_number.timbre_repeticiones_global') | int(1) }}"
+          ancho_pulso_global: "{{ states('number.sonoff_10021c07d7_pulsewidth') | float(0.5) }}"
     # Activamos el modo pulso en el dispositivo Sonoff
     - service: switch.turn_on
       target:
         entity_id: switch.sonoff_10021c07d7_pulse
-    # Configuramos el ancho del pulso en el dispositivo Sonoff
-    - service: number.set_value
-      target:
-        entity_id: number.sonoff_10021c07d7_pulsewidth
-      data:
-        value: "{{ ancho_pulso_global }}"
     # Método mejorado que valida la ejecución completa del pulso
     - repeat:
         count: "{{ repeticiones_global }}"
