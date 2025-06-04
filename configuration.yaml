@@ -10,7 +10,7 @@ lovelace:
   resources:
     - url: /hacsfiles/button-card/button-card.js
       type: module
-    - url: /hacsfile/lovelace-digital-clock/digital-clock.js
+    - url: /hacsfiles/lovelace-digital-clock/digital-clock.js
       type: module
 
 automation: !include automations.yaml
